@@ -4,81 +4,50 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <HelloWorld msg="Online Photo Filters" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/edit">Editor</RouterLink>
-      </nav>
+  <div class="app-container">
+    <div class="app-side">
+      <header>
+        <div class="wrapper">
+          <HelloWorld msg="Online Photo Filters" />
+          <nav>
+            <RouterLink to="/">Home</RouterLink>
+            <RouterLink to="/about">About</RouterLink>
+          </nav>
+        </div>
+      </header>
+      <RouterView />
     </div>
-  </header>
-
-  <RouterView />
+    <div class="ad-side">Ads here</div>
+  </div>
 </template>
 
-<style scoped>
+<style>
+body {
+  background: #111;
+  color: #777;
+}
 header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
   text-align: center;
-  margin-top: 2rem;
+}
+a {
+  text-decoration: none;
+  margin: 1em;
+  color: #777;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.app-container {
+  height: 100vh;
+  max-width: 100vw;
+  display: grid;
+  grid-template-areas: 'app ads';
+  grid-template-columns: calc(100% - 200px) 200px;
+  grid-template-rows: 1fr;
 }
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.app-side {
+  grid-area: app;
+  position: relative;
 }
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.ad-side {
+  grid-area: ads;
 }
 </style>
