@@ -7,7 +7,6 @@ defineProps<{
 <template>
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
-    <h3>Free filters for your photos. Upload a photo and choose a filter, then download</h3>
   </div>
 </template>
 
@@ -17,6 +16,7 @@ h1 {
   font-size: 2.6rem;
   position: relative;
   top: -10px;
+  text-align: center;
 }
 
 h3 {
@@ -26,12 +26,5 @@ h3 {
 .greetings h1,
 .greetings h3 {
   text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
 }
 </style>
