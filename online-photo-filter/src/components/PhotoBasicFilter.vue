@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FilterName from '../components/FilterName.vue'
 import { ref, useTemplateRef, onMounted } from 'vue'
 import * as htmlToImage from 'html-to-image'
 import { toJpeg } from 'html-to-image'
@@ -8,10 +9,7 @@ import { saveAs } from 'file-saver'
 const displayName = ref()
 const props = defineProps<{
   userImage: any,
-  filterImage: any,
-  filterPath: string,
-  globalFilterMode: string | undefined,
-  globalBlendMode: string,
+  filterName: string
 }>()
 
 const baseImgRef = useTemplateRef('baseImg')
@@ -46,16 +44,11 @@ const tapDownloadImg = (event: any) => {
 
 <template>
   <div class="frame-container">
-    <div ref="photoFrame" class="frame">
-      <img
-        :src="filterPath + filterImage + '.jpg'"
-        :style="{ 'mix-blend-mode': globalBlendMode }"
-        class="overlay"
-        alt=""
-      />
-      <img :class="globalFilterMode" class="filtered-img" v-if="userImage" :src="userImage" />
-      <img ref="baseImg" class="base" v-if="userImage" :src="userImage" />
+    <FilterName :filterName="filterName" />
+    <div ref="photoFrame"  class="frame">
+      <img ref="baseImg" :class="filterName" v-if="userImage" :src="userImage" />
     </div>
+
     <div class="frame-controls">
       <button @click="tapDownloadImg">download</button>
     </div>

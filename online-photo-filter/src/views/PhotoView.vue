@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import FilterName from '../components/FilterName.vue'
 import PhotoFrame from '../components/PhotoFrame.vue'
+import PhotoBasicFilter from '../components/PhotoBasicFilter.vue'
 
 const blendMode = ref('soft-light')
 let selectedImg = ref('/img/squirell.jpg')
@@ -80,6 +81,13 @@ onMounted(() => {
   window.addEventListener('keydown', onPageDown)
 })
 
+const onSetSelectedImg = (img: string) => {
+  const file = event.target.files[0];
+  if (file) {
+    selectedImg.value = URL.createObjectURL(file);
+  }
+}
+
 const changeFilterLeft = () => {
   if (filterNames.indexOf(globalFilterMode.value) === -1) {
     globalFilterMode.value = filterNames[filterNames.length - 1]
@@ -128,14 +136,27 @@ const onPageDown = (e: any) => {
 
 <template>
   <div class="global-controls">
-    <select v-model="globalFilterMode" id="filterMode">
-      <option disabled value="">Please select one</option>
-      <option v-for="n in filterNames">{{ n }}</option>
-    </select>
-    <select v-model="globalBlendMode" id="blendModes">
-      <option disabled value="">Please select one</option>
-      <option v-for="n in blendModes">{{ n }}</option>
-    </select>
+    <div>
+
+      <div>
+        z - x
+      </div>
+      <select v-model="globalFilterMode" id="filterMode">
+        <option disabled value="">Please select one</option>
+        <option v-for="n in filterNames">{{ n }}</option>
+      </select>
+    </div>
+
+    <div>
+
+      <div>
+        left arrow - right arrow
+      </div>
+      <select v-model="globalBlendMode" id="blendModes">
+        <option disabled value="">Please select one</option>
+        <option v-for="n in blendModes">{{ n }}</option>
+      </select>
+    </div>
   </div>
 
   <div>
@@ -148,8 +169,7 @@ const onPageDown = (e: any) => {
       <h2>Basic Filters</h2>
       <div class="instagram-filters">
         <div v-for="n in filterNames">
-          <FilterName :filterName="n" />
-          <img @click="tapDownloadImg" :class="n" v-if="selectedImg" :src="selectedImg" />
+          <PhotoBasicFilter :filterName="n" :userImage="selectedImg" />
         </div>
       </div>
     </section>
@@ -252,7 +272,7 @@ section {
   z-index: 10;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 

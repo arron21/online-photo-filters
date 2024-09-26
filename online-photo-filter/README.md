@@ -31,3 +31,14 @@ Passing in globalBlendMode and globalFilterMode worked like a charm.
 Those variables are defined on the PhotoView component (which is basically the main component) and the syntax is simple
 
 `const globalBlendMode = ref('soft-light')`
+
+Something that was a little confusing was updating certain variables values. For example this function was strange because selectedImg was no enough, I had to target the /value property of the ref object.
+
+```
+const onSetSelectedImg = (img: string) => {
+  const file = event.target.files[0];
+  if (file) {
+    selectedImg.value = URL.createObjectURL(file);
+  }
+}
+```
