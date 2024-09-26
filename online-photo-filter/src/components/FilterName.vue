@@ -7,7 +7,7 @@ const props = defineProps<{
 }>()
 
 onMounted(() => {
-  displayName.value = props.filterName
+  displayName.value = props.filterName.split('-')[1]
 })
 
 </script>
