@@ -1,0 +1,136 @@
+{
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "npm:npm-run-all2@6.2.3": "npm:npm-run-all2@6.2.3"
+    },
+    "npm": {
+      "ansi-styles@6.2.1": {
+        "integrity": "sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==",
+        "dependencies": {}
+      },
+      "balanced-match@1.0.2": {
+        "integrity": "sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==",
+        "dependencies": {}
+      },
+      "brace-expansion@2.0.1": {
+        "integrity": "sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==",
+        "dependencies": {
+          "balanced-match": "balanced-match@1.0.2"
+        }
+      },
+      "cross-spawn@7.0.3": {
+        "integrity": "sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==",
+        "dependencies": {
+          "path-key": "path-key@3.1.1",
+          "shebang-command": "shebang-command@2.0.0",
+          "which": "which@2.0.2"
+        }
+      },
+      "isexe@2.0.0": {
+        "integrity": "sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==",
+        "dependencies": {}
+      },
+      "json-parse-even-better-errors@3.0.2": {
+        "integrity": "sha512-fi0NG4bPjCHunUJffmLd0gxssIgkNmArMvis4iNah6Owg1MCJjWhEcDLmsK6iGkJq3tHwbDkTlce70/tmXN4cQ==",
+        "dependencies": {}
+      },
+      "memorystream@0.3.1": {
+        "integrity": "sha512-S3UwM3yj5mtUSEfP41UZmt/0SCoVYUcU1rkXv+BQ5Ig8ndL4sPoJNBUJERafdPb5jjHJGuMgytgKvKIf58XNBw==",
+        "dependencies": {}
+      },
+      "minimatch@9.0.5": {
+        "integrity": "sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==",
+        "dependencies": {
+          "brace-expansion": "brace-expansion@2.0.1"
+        }
+      },
+      "npm-normalize-package-bin@3.0.1": {
+        "integrity": "sha512-dMxCf+zZ+3zeQZXKxmyuCKlIDPGuv8EF940xbkC4kQVDTtqoh6rJFO+JTKSA6/Rwi0getWmtuy4Itup0AMcaDQ==",
+        "dependencies": {}
+      },
+      "npm-run-all2@6.2.3": {
+        "integrity": "sha512-5RsxC7jEc/RjxOYBVdEfrJf5FsJ0pHA7jr2/OxrThXknajETCTYjigOCG3iaGjdYIKEQlDuCG0ir0T1HTva8pg==",
+        "dependencies": {
+          "ansi-styles": "ansi-styles@6.2.1",
+          "cross-spawn": "cross-spawn@7.0.3",
+          "memorystream": "memorystream@0.3.1",
+          "minimatch": "minimatch@9.0.5",
+          "pidtree": "pidtree@0.6.0",
+          "read-package-json-fast": "read-package-json-fast@3.0.2",
+          "shell-quote": "shell-quote@1.8.1"
+        }
+      },
+      "path-key@3.1.1": {
+        "integrity": "sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==",
+        "dependencies": {}
+      },
+      "pidtree@0.6.0": {
+        "integrity": "sha512-eG2dWTVw5bzqGRztnHExczNxt5VGsE6OwTeCG3fdUf9KBsZzO3R5OIIIzWR+iZA0NtZ+RDVdaoE2dK1cn6jH4g==",
+        "dependencies": {}
+      },
+      "read-package-json-fast@3.0.2": {
+        "integrity": "sha512-0J+Msgym3vrLOUB3hzQCuZHII0xkNGCtz/HJH9xZshwv9DbDwkw1KaE3gx/e2J5rpEY5rtOy6cyhKOPrkP7FZw==",
+        "dependencies": {
+          "json-parse-even-better-errors": "json-parse-even-better-errors@3.0.2",
+          "npm-normalize-package-bin": "npm-normalize-package-bin@3.0.1"
+        }
+      },
+      "shebang-command@2.0.0": {
+        "integrity": "sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==",
+        "dependencies": {
+          "shebang-regex": "shebang-regex@3.0.0"
+        }
+      },
+      "shebang-regex@3.0.0": {
+        "integrity": "sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==",
+        "dependencies": {}
+      },
+      "shell-quote@1.8.1": {
+        "integrity": "sha512-6j1W9l1iAs/4xYBI1SYOVZyFcCis9b4KCLQ8fgAGG07QvzaRLVVRQvAy85yNmmZSjYjg4MWh4gNvlPujU/5LpA==",
+        "dependencies": {}
+      },
+      "which@2.0.2": {
+        "integrity": "sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==",
+        "dependencies": {
+          "isexe": "isexe@2.0.0"
+        }
+      }
+    }
+  },
+  "remote": {},
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/assert@1"
+    ],
+    "packageJson": {
+      "dependencies": [
+        "npm:@rushstack/eslint-patch@^1.8.0",
+        "npm:@tsconfig/node20@^20.1.4",
+        "npm:@types/jsdom@^21.1.7",
+        "npm:@types/node@^20.14.5",
+        "npm:@vitejs/plugin-vue-jsx@^4.0.0",
+        "npm:@vitejs/plugin-vue@^5.0.5",
+        "npm:@vue/eslint-config-prettier@^9.0.0",
+        "npm:@vue/eslint-config-typescript@^13.0.0",
+        "npm:@vue/test-utils@^2.4.6",
+        "npm:@vue/tsconfig@^0.5.1",
+        "npm:eslint-plugin-vue@^9.23.0",
+        "npm:eslint@^8.57.0",
+        "npm:file-saver@^2.0.5",
+        "npm:html-to-image@^1.11.11",
+        "npm:jsdom@^24.1.0",
+        "npm:npm-run-all2@^6.2.0",
+        "npm:pinia@^2.1.7",
+        "npm:prettier@^3.2.5",
+        "npm:sass-embedded@^1.77.8",
+        "npm:typescript@~5.4.0",
+        "npm:vite@^5.3.1",
+        "npm:vitest@^1.6.0",
+        "npm:vue-router@^4.3.3",
+        "npm:vue-tsc@^2.0.21",
+        "npm:vue@^3.4.29"
+      ]
+    }
+  }
+}

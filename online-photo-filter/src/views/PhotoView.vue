@@ -1,18 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-
-import * as htmlToImage from 'html-to-image'
-import { toJpeg } from 'html-to-image'
-import { saveAs } from 'file-saver'
+import FilterName from '../components/FilterName.vue'
+import PhotoFrame from '../components/PhotoFrame.vue'
 
 const blendMode = ref('soft-light')
-let selectedImg = ref('/img/andrew-cats.jpg')
+let selectedImg = ref('/img/squirell.jpg')
 
 const globalBlendMode = ref('soft-light')
-
-const defaultImg = ref('/img/andrew-cats.jpg')
-
-const filterOptions = Array.from({ length: 28 }, (_, i) => i + 1)
+const globalFilterMode = ref('filter-core')
 const filterMultiOptions = Array.from({ length: 15 }, (_, i) => i + 1)
 const lightLeakColors = ['Cyan', 'Magenta', 'Orange', 'Red', 'Yellow']
 
@@ -81,75 +76,26 @@ const blendModes = [
   'luminosity'
 ]
 
-const tapDownloadImg = (event: any) => {
-  console.log(event)
-
-  const el = event.target.parentElement
-
-  htmlToImage
-    .toJpeg(el)
-    .then(function (dataUrl: any) {
-      var img = new Image()
-      img.src = dataUrl
-      if (window.saveAs) {
-        window.saveAs(dataUrl, 'my-node.jpg')
-      } else {
-        saveAs(dataUrl, 'my-node.jpg')
-      }
-    })
-    .catch(function (error: any) {
-      console.error('oops, something went wrong!', error)
-    })
-}
-
-const saveImage = (img: any) => {
-  console.log(img)
-  const el = document.getElementById('frame')
-  htmlToImage
-    .toJpeg(el)
-    .then(function (dataUrl: any) {
-      var img = new Image()
-      img.src = dataUrl
-      if (window.saveAs) {
-        window.saveAs(dataUrl, 'my-node.jpg')
-      } else {
-        saveAs(dataUrl, 'my-node.jpg')
-      }
-    })
-    .catch(function (error: any) {
-      console.error('oops, something went wrong!', error)
-    })
-}
-
-const onSetSelectedImg = (event: any) => {
-  const file = event.target.files[0]
-  if (file) {
-    const reader = new FileReader()
-    reader.onload = (e: any) => {
-      console.log(e)
-      console.log(e.target.result)
-
-      // TODO: figure out how to make sure change detection works
-      // selectedImg = ref(e.target.result)
-      selectedImg.value = e.target.result
-    }
-    reader.readAsDataURL(file)
-  }
-}
-
 onMounted(() => {
-  console.log(`the component is now mounted.`)
-  console.log(defaultImg.value)
-  // selectedImg.value = defaultImg.value
   window.addEventListener('keydown', onPageDown)
 })
 
-const setDefaultImg = () => {
-  console.log(defaultImg)
-  selectedImg.value = defaultImg.value
+const changeFilterLeft = () => {
+  if (filterNames.indexOf(globalFilterMode.value) === -1) {
+    globalFilterMode.value = filterNames[filterNames.length - 1]
+  } else {
+    globalFilterMode.value = filterNames[filterNames.indexOf(globalFilterMode.value) - 1]
+  }
 }
 
-const changeFilterLeft = () => {
+const changeFilterRight = () => {
+  if (filterNames.indexOf(globalFilterMode.value) === filterNames.length - 1) {
+    globalFilterMode.value = filterNames.length
+  }
+  globalFilterMode.value = filterNames[filterNames.indexOf(globalFilterMode.value) + 1]
+}
+
+const changeBlendModeLeft = () => {
   if (blendModes.indexOf(globalBlendMode.value) === -1) {
     globalBlendMode.value = blendModes[blendModes.length - 1]
   } else {
@@ -157,8 +103,7 @@ const changeFilterLeft = () => {
   }
 }
 
-const changeFilterRight = () => {
-  console.log(blendModes.indexOf(globalBlendMode.value))
+const changeBlendModeRight = () => {
   if (blendModes.indexOf(globalBlendMode.value) === blendModes.length - 1) {
     globalBlendMode.value = blendModes.length
   }
@@ -173,16 +118,20 @@ const onPageDown = (e: any) => {
     changeFilterRight()
   }
   if (e.keyCode === 37) {
-    changeFilterLeft()
+    changeBlendModeLeft()
   }
   if (e.keyCode === 39) {
-    changeFilterRight()
+    changeBlendModeRight()
   }
 }
 </script>
 
 <template>
   <div class="global-controls">
+    <select v-model="globalFilterMode" id="filterMode">
+      <option disabled value="">Please select one</option>
+      <option v-for="n in filterNames">{{ n }}</option>
+    </select>
     <select v-model="globalBlendMode" id="blendModes">
       <option disabled value="">Please select one</option>
       <option v-for="n in blendModes">{{ n }}</option>
@@ -199,6 +148,7 @@ const onPageDown = (e: any) => {
       <h2>Basic Filters</h2>
       <div class="instagram-filters">
         <div v-for="n in filterNames">
+          <FilterName :filterName="n" />
           <img @click="tapDownloadImg" :class="n" v-if="selectedImg" :src="selectedImg" />
         </div>
       </div>
@@ -208,18 +158,7 @@ const onPageDown = (e: any) => {
       <h2>Multi Directional Light Leak Filters</h2>
       <div class="instagram-filters">
         <div v-for="n in filterMultiOptions">
-          <div class="frame">
-            <img
-              :src="'/lightleak1/Multi-' + n + '.jpg'"
-              :style="{ 'mix-blend-mode': globalBlendMode }"
-              class="overlay"
-              alt=""
-            />
-            <img class="filtered-img" v-if="selectedImg" :src="selectedImg" />
-            <img class="base" v-if="selectedImg" :src="selectedImg" />
-          </div>
-
-          <!-- <img :class="n" v-if="selectedImg" :src="selectedImg" /> -->
+          <PhotoFrame :filterImage="n" :filterPath="'/lightleak1/Multi-'" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
         </div>
       </div>
     </section>
@@ -227,17 +166,10 @@ const onPageDown = (e: any) => {
     <section>
       <h2>Light Leak 1 Filters</h2>
       <div class="instagram-filters">
+        
         <div v-for="n in lightLeakColors">
-          <div class="frame">
-            <img
-              :src="'/Light Leak 1/Light Leak 1 - ' + n + '.jpg'"
-              :style="{ 'mix-blend-mode': globalBlendMode }"
-              class="overlay"
-              alt=""
-            />
-            <img class="filtered-img" v-if="selectedImg" :src="selectedImg" />
-            <img class="base" v-if="selectedImg" :src="selectedImg" />
-          </div>
+          <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 1/Light Leak 1 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
+
         </div>
       </div>
     </section>
@@ -246,17 +178,7 @@ const onPageDown = (e: any) => {
       <h2>Light Leak 2 Filters</h2>
       <div class="instagram-filters">
         <div v-for="n in lightLeakColors">
-          <div class="frame">
-            <img
-              @click="tapDownloadImg"
-              :src="'/Light Leak 2/Light Leak 2 - ' + n + '.jpg'"
-              :style="{ 'mix-blend-mode': globalBlendMode }"
-              class="overlay"
-              alt=""
-            />
-            <img class="filtered-img" v-if="selectedImg" :src="selectedImg" />
-            <img class="base" v-if="selectedImg" :src="selectedImg" />
-          </div>
+          <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 2/Light Leak 2 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
         </div>
       </div>
     </section>
@@ -265,16 +187,8 @@ const onPageDown = (e: any) => {
       <h2>Light Leak 3 Filters</h2>
       <div class="instagram-filters">
         <div v-for="n in lightLeakColors">
-          <div class="frame">
-            <img
-              :src="'/Light Leak 3/Light Leak 3 - ' + n + '.jpg'"
-              :style="{ 'mix-blend-mode': globalBlendMode }"
-              class="overlay"
-              alt=""
-            />
-            <img class="filtered-img" v-if="selectedImg" :src="selectedImg" />
-            <img class="base" v-if="selectedImg" :src="selectedImg" />
-          </div>
+          <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 3/Light Leak 3 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
+
         </div>
       </div>
     </section>
@@ -283,16 +197,7 @@ const onPageDown = (e: any) => {
       <h2>Light Leak 4 Filters</h2>
       <div class="instagram-filters">
         <div v-for="n in lightLeakColors">
-          <div class="frame">
-            <img
-              :src="'/Light Leak 4/Light Leak 4 - ' + n + '.jpg'"
-              :style="{ 'mix-blend-mode': globalBlendMode }"
-              class="overlay"
-              alt=""
-            />
-            <img class="filtered-img" v-if="selectedImg" :src="selectedImg" />
-            <img class="base" v-if="selectedImg" :src="selectedImg" />
-          </div>
+          <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 4/Light Leak 4 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
         </div>
       </div>
     </section>
@@ -301,16 +206,7 @@ const onPageDown = (e: any) => {
       <h2>Light Leak 5 Filters</h2>
       <div class="instagram-filters">
         <div v-for="n in lightLeakColors">
-          <div class="frame">
-            <img
-              :src="'/Light Leak 5/Light Leak 5 - ' + n + '.jpg'"
-              :style="{ 'mix-blend-mode': globalBlendMode }"
-              class="overlay"
-              alt=""
-            />
-            <img class="filtered-img" v-if="selectedImg" :src="selectedImg" />
-            <img class="base" v-if="selectedImg" :src="selectedImg" />
-          </div>
+          <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 5/Light Leak 5 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
         </div>
       </div>
     </section>
@@ -319,16 +215,7 @@ const onPageDown = (e: any) => {
       <h2>Light Leak 6 Filters</h2>
       <div class="instagram-filters">
         <div v-for="n in lightLeakColors">
-          <div class="frame">
-            <img
-              :src="'/Light Leak 6/Light Leak 6 - ' + n + '.jpg'"
-              :style="{ 'mix-blend-mode': globalBlendMode }"
-              class="overlay"
-              alt=""
-            />
-            <img class="filtered-img" v-if="selectedImg" :src="selectedImg" />
-            <img class="base" v-if="selectedImg" :src="selectedImg" />
-          </div>
+          <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 6/Light Leak 6 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
         </div>
       </div>
     </section>
@@ -337,16 +224,7 @@ const onPageDown = (e: any) => {
       <h2>Light Leak 7 Filters</h2>
       <div class="instagram-filters">
         <div v-for="n in lightLeakColors">
-          <div class="frame">
-            <img
-              :src="'/Light Leak 7/Light Leak 7 - ' + n + '.jpg'"
-              :style="{ 'mix-blend-mode': globalBlendMode }"
-              class="overlay"
-              alt=""
-            />
-            <img class="filtered-img" v-if="selectedImg" :src="selectedImg" />
-            <img class="base" v-if="selectedImg" :src="selectedImg" />
-          </div>
+          <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 7/Light Leak 7 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
         </div>
       </div>
     </section>
@@ -363,31 +241,7 @@ section {
   &:after {
   }
 }
-.frame {
-  position: relative;
-  display: inline-flex;
-  .base,
-  .filtered-img {
-    max-width: 200px;
-  }
-  .filtered-img {
-    inset: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-  }
 
-  .overlay {
-    position: absolute;
-    opacity: 0.9;
-    z-index: 2;
-    height: 100%;
-    width: 100%;
-
-    mix-blend-mode: screen;
-  }
-}
 
 .global-controls {
   position: fixed;
@@ -402,7 +256,5 @@ section {
   align-items: center;
 }
 
-.frame {
-  cursor: pointer;
-}
+
 </style>
