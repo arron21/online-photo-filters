@@ -167,7 +167,7 @@ const onPageDown = (e: any) => {
 
     <section>
       <h2>Basic Filters</h2>
-      <div class="instagram-filters">
+      <div class="filters-container">
         <div v-for="n in filterNames">
           <PhotoBasicFilter :filterName="n" :userImage="selectedImg" />
         </div>
@@ -176,7 +176,7 @@ const onPageDown = (e: any) => {
 
     <section>
       <h2>Multi Directional Light Leak Filters</h2>
-      <div class="instagram-filters">
+      <div class="filters-container">
         <div v-for="n in filterMultiOptions">
           <PhotoFrame :filterImage="n" :filterPath="'/lightleak1/Multi-'" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
         </div>
@@ -185,7 +185,7 @@ const onPageDown = (e: any) => {
 
     <section>
       <h2>Light Leak 1 Filters</h2>
-      <div class="instagram-filters">
+      <div class="filters-container">
         
         <div v-for="n in lightLeakColors">
           <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 1/Light Leak 1 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
@@ -196,7 +196,7 @@ const onPageDown = (e: any) => {
 
     <section>
       <h2>Light Leak 2 Filters</h2>
-      <div class="instagram-filters">
+      <div class="filters-container">
         <div v-for="n in lightLeakColors">
           <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 2/Light Leak 2 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
         </div>
@@ -205,7 +205,7 @@ const onPageDown = (e: any) => {
 
     <section>
       <h2>Light Leak 3 Filters</h2>
-      <div class="instagram-filters">
+      <div class="filters-container">
         <div v-for="n in lightLeakColors">
           <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 3/Light Leak 3 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
 
@@ -215,7 +215,7 @@ const onPageDown = (e: any) => {
 
     <section>
       <h2>Light Leak 4 Filters</h2>
-      <div class="instagram-filters">
+      <div class="filters-container">
         <div v-for="n in lightLeakColors">
           <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 4/Light Leak 4 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
         </div>
@@ -224,7 +224,7 @@ const onPageDown = (e: any) => {
 
     <section>
       <h2>Light Leak 5 Filters</h2>
-      <div class="instagram-filters">
+      <div class="filters-container">
         <div v-for="n in lightLeakColors">
           <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 5/Light Leak 5 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
         </div>
@@ -233,7 +233,7 @@ const onPageDown = (e: any) => {
 
     <section>
       <h2>Light Leak 6 Filters</h2>
-      <div class="instagram-filters">
+      <div class="filters-container">
         <div v-for="n in lightLeakColors">
           <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 6/Light Leak 6 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
         </div>
@@ -242,7 +242,7 @@ const onPageDown = (e: any) => {
 
     <section>
       <h2>Light Leak 7 Filters</h2>
-      <div class="instagram-filters">
+      <div class="filters-container">
         <div v-for="n in lightLeakColors">
           <PhotoFrame :filterImage="n" :filterPath="'/Light Leak 7/Light Leak 7 - '" :userImage="selectedImg" :globalBlendMode="globalBlendMode" :globalFilterMode="globalFilterMode" />
         </div>
@@ -251,7 +251,7 @@ const onPageDown = (e: any) => {
   </div>
 </template>
 
-<style scoped>
+<style>
 section {
   padding: 1rem;
   margin: 1rem 0rem;
@@ -279,6 +279,8 @@ section {
   @media screen and (max-width: 1024px) { 
     width: 100%;
   }
+
+
 }
 
 </style>
