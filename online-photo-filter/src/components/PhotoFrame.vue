@@ -67,7 +67,6 @@ const tapDownloadImg = (event: any) => {
   position: relative;
 }
 .frame {
-  cursor: pointer;
   position: relative;
 }
 

@@ -253,13 +253,14 @@ const onPageDown = (e: any) => {
 
 <style scoped>
 section {
-  padding: 2em;
+  padding: 1rem;
   margin: 1rem 0rem;
   background-color: #333;
-  border-radius: 2em;
+  border-radius: 1rem;
   box-shadow: 2px 4px 0px #222;
   &:after {
   }
+  max-width: calc(100vw - 3em);
 }
 
 
@@ -269,12 +270,15 @@ section {
   left: 0;
   width: calc(100% - 200px);
   height: 44px;
-  z-index: 10;
+  z-index: 100;
+  padding: 1rem;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 1024px) { 
+    width: 100%;
+  }
 }
-
 
 </style>
