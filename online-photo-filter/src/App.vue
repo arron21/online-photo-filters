@@ -38,6 +38,7 @@ a {
 .app-container {
   height: 100vh;
   max-width: 100vw;
+  margin: 1rem 1rem;
   display: grid;
   grid-template-areas: 'app ads';
   grid-template-columns: calc(100% - 200px) 200px;

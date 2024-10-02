@@ -254,7 +254,7 @@ const onPageDown = (e: any) => {
 <style scoped>
 section {
   padding: 2em;
-  margin: 2em;
+  margin: 1rem 0rem;
   background-color: #333;
   border-radius: 2em;
   box-shadow: 2px 4px 0px #222;
