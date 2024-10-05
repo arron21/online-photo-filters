@@ -59,9 +59,12 @@
 }
 
 button {
-  padding: 4px;
-  background: var(--color-text);
+  background: rgb(25 25 25);
   border: none;
+  cursor: pointer;
+  color: white;
+  border-radius: 99px;
+  padding: 4px 10px;
 }
 
 
@@ -86,4 +89,27 @@ button {
 }
 .filters-container  > div {
   scroll-snap-align: start;
+}
+
+h2 {
+  margin-bottom: .5rem;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

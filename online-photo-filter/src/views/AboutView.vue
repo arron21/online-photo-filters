@@ -4,9 +4,7 @@
     <p>
       This project was created to offer a free and simple online photo filter application with no hidden costs or conditions.
     </p>
-    <p>Your privacy is fully protected—your photos never leave your device. All filters are applied locally on your computer, ensuring 100% client-side processing.</p>
-    <p>While the website does feature ads to cover hosting expenses, there are no additional fees or data tracking involved.</p>
-    <h3>Instructions</h3>
+    <h2>Instructions</h2>
     <ul>
       <li>
         Filter Cycling: Use the <kbd>Z</kbd> and <kbd>X</kbd> keys to cycle through different filters applied to the "light leak" effects.
@@ -24,15 +22,13 @@
     </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+<style scoped>
+.frame {
+  margin: 1rem;
 }
-
+h1,h2 {
+  margin: 1rem 0;
+}
 kbd {
   background-color: #eee;
   border-radius: 3px;

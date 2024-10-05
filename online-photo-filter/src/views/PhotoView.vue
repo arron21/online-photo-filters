@@ -135,31 +135,8 @@ const onPageDown = (e: any) => {
 </script>
 
 <template>
-  <div class="global-controls">
-    <div>
 
-      <div>
-        z - x
-      </div>
-      <select v-model="globalFilterMode" id="filterMode">
-        <option disabled value="">Please select one</option>
-        <option v-for="n in filterNames">{{ n }}</option>
-      </select>
-    </div>
-
-    <div>
-
-      <div>
-        left arrow - right arrow
-      </div>
-      <select v-model="globalBlendMode" id="blendModes">
-        <option disabled value="">Please select one</option>
-        <option v-for="n in blendModes">{{ n }}</option>
-      </select>
-    </div>
-  </div>
-
-  <div>
+  <div class="filters-sections">
     <section>
       <h1>Upload your photo</h1>
       <input accept="image/*" @change="onSetSelectedImg" type="file" />
@@ -249,37 +226,97 @@ const onPageDown = (e: any) => {
       </div>
     </section>
   </div>
-</template>
+  <div class="global-controls">
+    <div>
+
+      <div>
+        <div>
+          z - x
+        </div>
+        <select v-model="globalFilterMode" id="filterMode">
+          <option disabled value="">Please select one</option>
+          <option v-for="n in filterNames">{{ n }}</option>
+        </select>
+      </div>
+      
+      <div>
+        
+        <div>
+          left arrow - right arrow
+        </div>
+        <select v-model="globalBlendMode" id="blendModes">
+          <option disabled value="">Please select one</option>
+          <option v-for="n in blendModes">{{ n }}</option>
+        </select>
+      </div>
+    </div>
+    </div>
+    
+  </template>
 
 <style>
 section {
   padding: 1rem;
-  margin: 1rem 0rem;
-  background-color: #333;
+  margin: 1rem;
+  background-color: #191919;
   border-radius: 1rem;
-  box-shadow: 2px 4px 0px #222;
+  /* box-shadow: 2px 4px 0px #222; */
   &:after {
   }
   max-width: calc(100vw - 3em);
-}
-
-
-.global-controls {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: calc(100% - 200px);
-  height: 44px;
-  z-index: 100;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   @media screen and (max-width: 1024px) { 
     width: 100%;
+    margin: 1rem auto;
+  }
+}
+
+.filters-sections {
+
+  /* margin-bottom: 360px; */
+}
+
+.global-controls {
+  position: sticky;
+  bottom: 20px;
+  max-width: 100%;
+  z-index: 100;
+  text-align: center;
+    padding: .5rem;
+  display: flex;
+  justify-content: space-evenly;
+  > div {
+    text-align: center;
+    padding: .5rem;
+  background-color: #191919;
+  display: flex;
+  border-radius: 50px;
+  justify-content: space-evenly;
+
+  gap: 1rem;
+  padding: .5rem 1.5rem;
+  }
+  @media screen and (max-width: 1024px) { 
   }
 
+  select {
+    background: #111111;
+    color: white;
+    border: none;
+    padding: 4px;
+    margin: 4px;
+    border-radius: 1rem;
+    text-align: center;
+    appearance: none;
+    position: relative;
+
+    &:after {
+      content: '\21C5';
+      position: absolute;
+      right: 0;
+      top:0;
+      display: block;
+    }
+  }
 
 }
 
