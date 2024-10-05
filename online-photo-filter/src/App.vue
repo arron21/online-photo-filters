@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+
+const date = new Date().getFullYear();
 </script>
 
 <template>
@@ -10,14 +12,25 @@ import HelloWorld from './components/HelloWorld.vue'
         <div class="wrapper">
           <HelloWorld msg="Online Photo Filters" />
           <nav>
-            <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/about">About</RouterLink>
+            <ul>
+              <li>
+                <RouterLink to="/">Home</RouterLink>
+              </li>
+              <li>
+                <RouterLink to="/about">About</RouterLink>
+              </li>
+            </ul>
           </nav>
         </div>
       </header>
-      <RouterView />
+      <main>
+        <RouterView />
+      </main>
     </div>
-    <div class="ad-side">Ads here</div>
+    <div class="ad-side"></div>
+    <footer>
+      <p>Made with ❤️ and ☕</p><p>Arron McCrory</p>
+    </footer>
   </div>
 </template>
 
@@ -29,6 +42,11 @@ body {
 header {
   text-align: center;
 }
+nav ul {
+  all: unset;
+  list-style-type: none;
+  display: flex;
+}
 a {
   text-decoration: none;
   margin: 1em;
@@ -38,21 +56,21 @@ a {
 .app-container {
   height: 100vh;
   max-width: 100vw;
-  margin: 1rem 1rem;
+
   display: grid;
-  grid-template-areas: 'app ads';
+  grid-template-areas: 
+    'app ads'
+    'footer footer';
   grid-template-columns: calc(100% - 200px) 200px;
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr 150px;
+  overflow-y: auto;
 }
 @media screen and (max-width: 1024px) {
   .app-container {
-    height: 100vh;
-    max-width: 100vw;
-    margin: 1rem 1rem;
-    display: grid;
     grid-template-areas: 
     'ads' 
-    'app';
+    'app'
+    'footer';
     grid-template-columns: 1fr;
     grid-template-rows: 150px 1fr;
   }
@@ -63,5 +81,11 @@ a {
 }
 .ad-side {
   grid-area: ads;
+}
+footer {
+  align-content: center;
+  text-align: center;
+  height: 150px;
+  display: block;
 }
 </style>

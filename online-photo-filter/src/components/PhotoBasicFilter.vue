@@ -27,12 +27,16 @@ const tapDownloadImg = (event: any) => {
   htmlToImage
     .toJpeg(el, {canvasWidth: scaledWidth, canvasHeight: scaledHeight})
     .then(function (dataUrl: any) {
+      const now = new Date();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+
       var img = new Image()
       img.src = dataUrl
       if (window.saveAs) {
-        window.saveAs(dataUrl, 'my-node.jpg')
+        window.saveAs(dataUrl, `photo-${minutes}-${seconds}.jpg`)
       } else {
-        saveAs(dataUrl, 'my-node.jpg')
+        saveAs(dataUrl, `photo-${minutes}-${seconds}.jpg`)
       }
     })
     .catch(function (error: any) {
@@ -60,7 +64,6 @@ const tapDownloadImg = (event: any) => {
   position: relative;
 }
 .frame {
-  cursor: pointer;
   position: relative;
 }
 
@@ -71,7 +74,6 @@ const tapDownloadImg = (event: any) => {
   width: 100%;
   height: 44px;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
