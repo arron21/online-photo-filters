@@ -277,7 +277,7 @@ section {
 
 .global-controls {
   position: sticky;
-  bottom: 20px;
+  bottom: 44px;
   max-width: 100%;
   z-index: 100;
   text-align: center;
