@@ -2,7 +2,7 @@
   <div class="frame">
     <h1>About</h1>
     <p>
-      This project was created to offer a free and simple online photo filter application with no hidden costs or conditions.
+      This project was created to offer a free and simple online photo filter application.
     </p>
     <h2>Instructions</h2>
     <ul>

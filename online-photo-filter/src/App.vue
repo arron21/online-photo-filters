@@ -42,6 +42,10 @@ body {
 header {
   text-align: center;
 }
+nav {
+  display: flex;
+  justify-content: center;
+}
 nav ul {
   all: unset;
   list-style-type: none;
@@ -85,7 +89,7 @@ a {
 footer {
   align-content: center;
   text-align: center;
-  height: 150px;
+  height: 200px;
   display: block;
 }
 </style>

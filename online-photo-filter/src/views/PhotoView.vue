@@ -4,10 +4,10 @@ import FilterName from '../components/FilterName.vue'
 import PhotoFrame from '../components/PhotoFrame.vue'
 import PhotoBasicFilter from '../components/PhotoBasicFilter.vue'
 
-const blendMode = ref('soft-light')
-let selectedImg = ref('/img/squirell.jpg')
+const blendMode = ref('color')
+let selectedImg = ref('/img/arron-blue-zion.jpg')
 
-const globalBlendMode = ref('soft-light')
+const globalBlendMode = ref('color')
 const globalFilterMode = ref('filter-core')
 const filterMultiOptions = Array.from({ length: 15 }, (_, i) => i + 1)
 const lightLeakColors = ['Cyan', 'Magenta', 'Orange', 'Red', 'Yellow']
@@ -230,8 +230,8 @@ const onPageDown = (e: any) => {
     <div>
 
       <div>
-        <div>
-          z - x
+        <div class="global-controls__description">
+          Filters: z - x
         </div>
         <select v-model="globalFilterMode" id="filterMode">
           <option disabled value="">Please select one</option>
@@ -240,9 +240,8 @@ const onPageDown = (e: any) => {
       </div>
       
       <div>
-        
-        <div>
-          left arrow - right arrow
+        <div class="global-controls__description">
+          Blend Modes: ⯇ - ⯈
         </div>
         <select v-model="globalBlendMode" id="blendModes">
           <option disabled value="">Please select one</option>
@@ -276,12 +275,14 @@ section {
 }
 
 .global-controls {
-  position: sticky;
+  position: fixed;
   bottom: 44px;
+  right: 0;
+  width: 480px;
   max-width: 100%;
   z-index: 100;
   text-align: center;
-    padding: .5rem;
+  padding: .5rem;
   display: flex;
   justify-content: space-evenly;
   > div {
@@ -294,6 +295,10 @@ section {
 
   gap: 1rem;
   padding: .5rem 1.5rem;
+  }
+
+  .global-controls__description {
+    line-height: 16px;
   }
   @media screen and (max-width: 1024px) { 
   }
