@@ -1,95 +1,145 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { ref, onMounted } from 'vue'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
 
-const date = new Date().getFullYear();
+const route = useRoute()
+const currentTheme = ref('dark')
+
+const toggleTheme = () => {
+  currentTheme.value = currentTheme.value === 'dark' ? 'light' : 'dark'
+  document.documentElement.setAttribute('data-theme', currentTheme.value)
+  try {
+    localStorage.setItem('raster-theme', currentTheme.value)
+  } catch (e) {
+    // ignore
+  }
+}
+
+onMounted(() => {
+  try {
+    const saved = localStorage.getItem('raster-theme')
+    if (saved === 'light' || saved === 'dark') {
+      currentTheme.value = saved
+    }
+  } catch (e) {
+    // ignore
+  }
+  document.documentElement.setAttribute('data-theme', currentTheme.value)
+})
 </script>
 
 <template>
-  <div class="app-container">
-    <div class="app-side">
-      <header>
-        <div class="wrapper">
-          <HelloWorld msg="Online Photo Filters" />
-          <nav>
-            <ul>
-              <li>
-                <RouterLink to="/">Home</RouterLink>
-              </li>
-              <li>
-                <RouterLink to="/about">About</RouterLink>
-              </li>
-            </ul>
-          </nav>
+  <div class="raster-app">
+    <!-- Architectural Swiss Masthead -->
+    <header class="raster-masthead">
+      <div class="raster-container raster-masthead-inner">
+        <div class="raster-flex raster-items-center gap-4">
+          <RouterLink to="/" class="raster-brand">
+            <span class="raster-brand-dot"></span>
+            <span>Online Photo Filter</span>
+          </RouterLink>
+          <span class="raster-tag raster-mono d-none-sm">[ v2.0 // RASTER ]</span>
         </div>
-      </header>
-      <main>
-        <RouterView />
-      </main>
-    </div>
-    <div class="ad-side"></div>
-    <footer>
-      <p>Made with ❤️ and ☕</p><p>Arron McCrory</p>
+
+        <nav class="raster-flex raster-items-center gap-6">
+          <ul class="raster-nav-links">
+            <li>
+              <RouterLink
+                to="/"
+                class="raster-nav-link"
+                :class="{ 'is-active': route.path === '/' }"
+              >
+                // STUDIO
+              </RouterLink>
+            </li>
+            <li>
+              <RouterLink
+                to="/about"
+                class="raster-nav-link"
+                :class="{ 'is-active': route.path === '/about' }"
+              >
+                // SPECS
+              </RouterLink>
+            </li>
+          </ul>
+
+          <div class="raster-flex raster-items-center gap-2">
+            <button
+              @click="toggleTheme"
+              class="raster-btn raster-btn-ghost raster-btn-sm raster-mono"
+              :title="'Switch to ' + (currentTheme === 'dark' ? 'light paper' : 'dark carbon') + ' mode'"
+            >
+              [ THEME: {{ currentTheme.toUpperCase() }} ]
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Workspace Viewport -->
+    <main class="raster-main">
+      <RouterView />
+    </main>
+
+    <!-- Architectural Swiss Ledger Footer -->
+    <footer class="raster-footer">
+      <div class="raster-container">
+        <div class="raster-grid">
+          <div class="col-4">
+            <div class="raster-label mb-1">Application // System</div>
+            <div class="raster-mono text-primary" style="font-weight: 600;">Online Photo Filter dot com</div>
+            <div class="raster-micro mt-1 text-muted">
+              Swiss International Typographic Design System · 0px Sharp Geometry
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="raster-label mb-1">Architecture // Tokens</div>
+            <div class="raster-mono text-primary">Engineered with Raster CSS</div>
+            <div class="raster-micro mt-1 text-muted">
+              Tabular numerals · Hairline borders · High-signal Vermillion
+            </div>
+          </div>
+
+          <div class="col-4 text-right">
+            <div class="raster-label mb-1">Author // Licensing</div>
+            <div class="raster-mono text-primary">Arron McCrory</div>
+            <div class="raster-micro mt-1 text-muted">
+              [ MIT LICENSE // 2026 ]
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
   </div>
 </template>
 
-<style>
-body {
-  background: #111;
-  color: #777;
-}
-header {
-  text-align: center;
-}
-nav {
+<style scoped>
+.raster-app {
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-}
-nav ul {
-  all: unset;
-  list-style-type: none;
-  display: flex;
-}
-a {
-  text-decoration: none;
-  margin: 1em;
-  color: #777;
+  flex-direction: column;
+  background-color: var(--raster-canvas);
+  color: var(--raster-fg-primary);
 }
 
-.app-container {
-  height: 100vh;
-  max-width: 100vw;
-
-  display: grid;
-  grid-template-areas: 
-    'app ads'
-    'footer footer';
-  grid-template-columns: calc(100% - 200px) 200px;
-  grid-template-rows: 1fr 150px;
-  overflow-y: auto;
+.raster-main {
+  flex: 1;
+  padding-top: var(--raster-space-6);
+  padding-bottom: var(--raster-space-12);
 }
-@media screen and (max-width: 1024px) {
-  .app-container {
-    grid-template-areas: 
-    'ads' 
-    'app'
-    'footer';
-    grid-template-columns: 1fr;
-    grid-template-rows: 150px 1fr;
+
+.raster-footer {
+  border-top: 1px solid var(--raster-border);
+  background-color: var(--raster-surface);
+  padding-top: var(--raster-space-6);
+  padding-bottom: var(--raster-space-8);
+  margin-top: auto;
+}
+
+@media (max-width: 640px) {
+  .d-none-sm {
+    display: none;
   }
-}
-.app-side {
-  grid-area: app;
-  position: relative;
-}
-.ad-side {
-  grid-area: ads;
-}
-footer {
-  align-content: center;
-  text-align: center;
-  height: 200px;
-  display: block;
 }
 </style>

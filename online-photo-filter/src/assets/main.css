@@ -1,7 +1,110 @@
-@import './base.css';
+/* Raster CSS Design System Integration */
+@import './raster.css';
 @import './filters/instagram.scss';
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-* {
-    font-family: "Outfit", sans-serif;
+/* Custom studio enhancement utility classes strictly adhering to Raster CSS tokens */
+:root {
+  --studio-canvas-min-height: 480px;
+}
+
+/* Studio Canvas Viewport Frame */
+.studio-viewport {
+  position: relative;
+  width: 100%;
+  min-height: var(--studio-canvas-min-height);
+  background-color: var(--raster-canvas);
+  border: 1px solid var(--raster-border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Swiss Architectural Crosshair corner marks */
+.crosshair-tl, .crosshair-tr, .crosshair-bl, .crosshair-br {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  z-index: 20;
+}
+.crosshair-tl {
+  top: 6px;
+  left: 6px;
+  border-top: 1px solid var(--raster-fg-muted);
+  border-left: 1px solid var(--raster-fg-muted);
+}
+.crosshair-tr {
+  top: 6px;
+  right: 6px;
+  border-top: 1px solid var(--raster-fg-muted);
+  border-right: 1px solid var(--raster-fg-muted);
+}
+.crosshair-bl {
+  bottom: 6px;
+  left: 6px;
+  border-bottom: 1px solid var(--raster-fg-muted);
+  border-left: 1px solid var(--raster-fg-muted);
+}
+.crosshair-br {
+  bottom: 6px;
+  right: 6px;
+  border-bottom: 1px solid var(--raster-fg-muted);
+  border-right: 1px solid var(--raster-fg-muted);
+}
+
+/* Subtle architectural coordinate grid in background when empty */
+.studio-viewport.is-empty {
+  background-image: 
+    linear-gradient(to right, var(--raster-border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--raster-border-subtle) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Dropzone interactive drag-over state */
+.studio-viewport.is-dragover {
+  border-color: var(--raster-accent);
+  background-color: var(--raster-accent-subtle);
+}
+
+/* Filter preview frame */
+.studio-canvas-wrapper {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  max-height: 70vh;
+}
+
+.studio-canvas-image {
+  display: block;
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+.studio-leak-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+/* Sharp scrollbars matching Raster CSS */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--raster-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--raster-border);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--raster-fg-muted);
 }
