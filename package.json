@@ -1,9 +1,0 @@
-{
-  "name": "online-photo-filters",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "build": "npm run --prefix online-photo-filter build",
-    "dev": "npm run --prefix online-photo-filter dev"
-  }
-}
